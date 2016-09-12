@@ -1,51 +1,16 @@
 {
   "Unit Tests": {
     "coverage": {
-      "/Users/brandon1985/turing/1module/1608/headcount/lib/district_repo.rb": [
+      "/Users/brandon1985/turing/1module/1608/headcount/lib/enrollment.rb": [
         1,
         1,
         1,
         1,
         1,
-        1,
-        2,
-        null,
-        null,
-        1,
-        1,
-        1,
-        1,
-        1991,
-        null,
-        null,
-        null,
-        1,
-        1993,
-        193,
-        null,
-        null,
-        null,
-        1,
-        1994,
-        null,
-        null,
-        null
-      ],
-      "/Users/brandon1985/turing/1module/1608/headcount/lib/district.rb": [
-        1,
-        null,
-        1,
-        null,
-        1,
-        194,
-        null,
-        null,
-        null,
-        null,
         null,
         null
       ]
     },
-    "timestamp": 1473723270
+    "timestamp": 1473724482
   }
 }
