@@ -2,6 +2,7 @@ require_relative 'test_helper'
 require_relative '../lib/enrollment_repository'
 
 class EnrollmentRepositoryTest < Minitest::Test
+
   def test_something
     er = EnrollmentRepository.new
     er.load_data({
@@ -32,4 +33,5 @@ class EnrollmentRepositoryTest < Minitest::Test
 
     assert_equal years, enrollment.kindergarten_participation_by_year
   end
+
 end

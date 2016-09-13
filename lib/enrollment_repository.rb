@@ -1,3 +1,4 @@
+require_relative '../lib/enrollment'
 require 'csv'
 require_relative './enrollment'
 
@@ -32,8 +33,10 @@ class EnrollmentRepository
     percentage.to_s[0..4].to_f
   end
 
+
   def find_by_name(name)
     @enrollments[name.upcase]
   end
+
 
 end
