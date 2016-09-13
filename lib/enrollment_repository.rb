@@ -2,7 +2,7 @@ require 'csv'
 require_relative './enrollment'
 
 class EnrollmentRepository
-
+  attr_reader :enrollments
   def initialize
     @enrollments = {}
   end
@@ -23,9 +23,8 @@ class EnrollmentRepository
 
     if !find_by_name(name)
       @enrollments[name] = Enrollment.new({:name => name.upcase, :kindergarten_participation => {year => percentage}})
-      require "pry"; binding.pry
     else
-      @enrollments[name].kindergarten_participation_by_year[year] = data
+      @enrollments[name].kindergarten_participation_by_year[year] = percentage
     end
   end
 

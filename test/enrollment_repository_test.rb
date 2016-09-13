@@ -11,10 +11,24 @@ class EnrollmentRepositoryTest < Minitest::Test
     })
     enrollment = er.find_by_name("ACADEMY 20")
 
-    require "pry"; binding.pry
     assert_equal "ACADEMY 20", enrollment.name
   end
 
-  # test_it_can_handle_a_single_key_value_pair_in_the_hash
-  #test_it_can_add_new_key_value_to_existing_participation_hash
+  def test_puts_multiple_years_in_kindergarten_participation_hash
+    er = EnrollmentRepository.new
+    er.load_data({
+      :enrollment => {
+        :kindergarten => "./test/fixtures/Kindergartners in full-day program.csv"
+      }
+    })
+    enrollment = er.find_by_name("academy 20")
+    years = ({"2007"=>"0.39159", "2006"=>"0.35364",
+              "2005"=>"0.26709", "2004"=>"0.30201",
+              "2008"=>"0.38456", "2009"=>"0.39",
+              "2010"=>"0.43628", "2011"=>"0.489",
+              "2012"=>"0.47883", "2013"=>"0.48774",
+              "2014"=>"0.49022"})
+
+    assert_equal years, enrollment.kindergarten_participation_by_year
+  end
 end
