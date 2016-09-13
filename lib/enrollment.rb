@@ -6,7 +6,7 @@ class Enrollment
   end
 
   def kindergarten_participation_in_year(year)
-    # given year, lookup percentage for that year
-    # return percentage, formatted appropriately
+    percentage = kindergarten_participation_by_year[year]
+    percentage.round(3)
   end
 end
