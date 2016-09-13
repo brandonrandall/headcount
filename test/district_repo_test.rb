@@ -15,6 +15,7 @@ class DistrictRepositoryTest < Minitest::Test
     })
     district = dr.find_by_name("ACADEMY 20")
     assert_equal "ACADEMY 20", district.name
+    # binding.pry
   end
 
   def test_district_existence

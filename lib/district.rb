@@ -6,7 +6,4 @@ class District
     @name = hash[:name]
   end
 
-
-
-
 end

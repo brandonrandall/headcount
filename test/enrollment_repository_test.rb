@@ -2,7 +2,8 @@ require_relative 'test_helper'
 require_relative '../lib/enrollment_repository'
 
 class EnrollmentRepositoryTest < Minitest::Test
-  def test_
+
+  def test_connecting
     er = EnrollmentRepository.new
     er.load_data({
       :enrollment => {
@@ -13,4 +14,6 @@ class EnrollmentRepositoryTest < Minitest::Test
 
     assert_equal "ACADEMY 20", enrollment.name
   end
+
+
 end
