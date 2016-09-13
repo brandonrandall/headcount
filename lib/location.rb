@@ -1,4 +1,4 @@
-require_relative './lib/district_repo'
+require_relative './lib/district_repository'
 
 class Location
 

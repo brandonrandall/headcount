@@ -25,4 +25,10 @@ class DistrictRepository
     @districts[name.upcase]
   end
 
+  def find_all_matching(name_fragment)
+    @districts.keys.select do |district_name|
+      district_name.upcase.include?(name_fragment.upcase)
+    end
+  end
+
 end
