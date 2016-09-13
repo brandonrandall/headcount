@@ -23,6 +23,7 @@ class DistrictRepositoryTest < Minitest::Test
     dr.districts["denver"] = District.new({name: "denver"})
     dr.district_existence("denver")
     assert_equal 1, dr.districts.keys.length
+
     dr.district_existence("lakewood")
     assert_equal 2, dr.districts.keys.length
   end
