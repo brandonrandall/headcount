@@ -15,7 +15,7 @@ class EnrollmentRepositoryTest < Minitest::Test
   end
 
   def test_multiple_years_data_in_kindergarten_participation_hash
-    
+
     er = EnrollmentRepository.new
     er.load_data({
       :enrollment => {
@@ -23,12 +23,12 @@ class EnrollmentRepositoryTest < Minitest::Test
       }
     })
     enrollment = er.find_by_name("academy 20")
-    years = ({"2007"=>"0.39159", "2006"=>"0.35364",
-              "2005"=>"0.26709", "2004"=>"0.30201",
-              "2008"=>"0.38456", "2009"=>"0.39",
-              "2010"=>"0.43628", "2011"=>"0.489",
-              "2012"=>"0.47883", "2013"=>"0.48774",
-              "2014"=>"0.49022"})
+    years = ({2007=>0.391, 2006=>0.353,
+              2005=>0.267, 2004=>0.302,
+              2008=>0.384, 2009=>0.39,
+              2010=>0.436, 2011=>0.489,
+              2012=>0.478, 2013=>0.487,
+              2014=>0.490})
 
     assert_equal years, enrollment.kindergarten_participation_by_year
   end
