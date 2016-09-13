@@ -14,7 +14,8 @@ class EnrollmentRepositoryTest < Minitest::Test
     assert_equal "ACADEMY 20", enrollment.name
   end
 
-  def test_puts_multiple_years_in_kindergarten_participation_hash
+  def test_multiple_years_data_in_kindergarten_participation_hash
+    
     er = EnrollmentRepository.new
     er.load_data({
       :enrollment => {
