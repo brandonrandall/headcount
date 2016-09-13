@@ -17,7 +17,7 @@ class DistrictRepositoryTest < Minitest::Test
     assert_equal "ACADEMY 20", district.name
   end
 
-  def test_
+  def test_district_existence
     dr = DistrictRepository.new
     dr.districts["denver"] = District.new({name: "denver"})
     dr.district_existence("denver")
