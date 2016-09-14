@@ -1,17 +1,18 @@
 require_relative '../lib/enrollment'
 require 'csv'
 require_relative './enrollment'
+require_relative 'data_extractor'
+
 
 class EnrollmentRepository
+  include DataExtractor
   attr_reader :enrollment
   def initialize
     @enrollments = {}
   end
 
-
   def load_data(hash)
-    file = hash[:enrollment][:kindergarten]
-    contents = CSV.read file, headers: true, header_converters: :symbol
+    contents = DataExtractor.extract(hash)
     contents.each do |row|
       enrollment_existence(row)
     end
