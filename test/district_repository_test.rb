@@ -46,7 +46,4 @@ class DistrictRepositoryTest < Minitest::Test
     })
     assert_equal EnrollmentRepository, dr.enrollments.class
   end
-
-
-
 end

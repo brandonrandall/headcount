@@ -10,11 +10,8 @@ class EnrollmentRepository
     @enrollments = {}
   end
 
-
   def load_data(hash)
     contents = DataExtractor.extract(hash)
-    # file = hash[:enrollment][:kindergarten]
-    # contents = CSV.read file, headers: true, header_converters: :symbol
     contents.each do |row|
       enrollment_existence(row)
     end
