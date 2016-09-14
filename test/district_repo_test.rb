@@ -58,10 +58,10 @@ class DistrictRepositoryTest < Minitest::Test
         :kindergarten => "./test/fixtures/Kindergartners in full-day program.csv"
       }
     })
-
+require "pry"; binding.pry
     assert_equal EnrollmentRepository, dr.enrollment.class
   end
 
- 
+
 
 end

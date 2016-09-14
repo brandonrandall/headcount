@@ -11,16 +11,17 @@ class DistrictRepository
   def load_data(hash)
     file = hash[:enrollment][:kindergarten]
     contents = CSV.read file, headers: true, header_converters: :symbol
+    @enrollments = EnrollmentRepository.new
+    @enrollments.load_data(hash)
     contents.each do |row|
       district_existence(row[:location])
     end
-    @enrollment = EnrollmentRepository.new
-    @enrollment.load_data(hash)
+    require "pry"; binding.pry
   end
 
   def district_existence(name)
     if !find_by_name(name)
-      @districts[name] = District.new({name: name.upcase})
+      @districts[name] = District.new({name: name.upcase, enrollment: @enrollments.find_by_name(name)})
     end
   end
 
