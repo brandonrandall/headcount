@@ -1,8 +1,9 @@
 require_relative 'district'
 require 'csv'
 require 'pry'
+require_relative 'enrollment_repository'
 class DistrictRepository
-  attr_accessor :districts
+  attr_reader :districts, :enrollment
   def initialize
     @districts = {}
   end
@@ -13,6 +14,8 @@ class DistrictRepository
     contents.each do |row|
       district_existence(row[:location])
     end
+    @enrollment = EnrollmentRepository.new
+    @enrollment.load_data(hash)
   end
 
   def district_existence(name)

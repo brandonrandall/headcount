@@ -35,7 +35,7 @@ class DistrictRepositoryTest < Minitest::Test
       }
     })
     districts = dr.find_all_matching("aG")
-    
+
     assert_equal 4, districts.count
   end
 
@@ -50,5 +50,18 @@ class DistrictRepositoryTest < Minitest::Test
 
     assert_equal [], districts
   end
+
+  def test_auto_create_enrollment_repo
+    dr = DistrictRepository.new
+    dr.load_data({
+      :enrollment => {
+        :kindergarten => "./test/fixtures/Kindergartners in full-day program.csv"
+      }
+    })
+
+    assert_equal EnrollmentRepository, dr.enrollment.class
+  end
+
+ 
 
 end
