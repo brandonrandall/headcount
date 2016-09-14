@@ -7,6 +7,5 @@ class Enrollment
 
   def kindergarten_participation_in_year(year)
     percentage = kindergarten_participation_by_year[year]
-    percentage.round(3)
   end
 end

@@ -2,21 +2,23 @@ require_relative 'district'
 require 'csv'
 require 'pry'
 require_relative 'enrollment_repository'
+require_relative 'data_extractor'
+
+
 class DistrictRepository
-  attr_reader :districts, :enrollment
+  include DataExtractor
+  attr_reader :districts, :enrollments
   def initialize
     @districts = {}
   end
 
   def load_data(hash)
-    file = hash[:enrollment][:kindergarten]
-    contents = CSV.read file, headers: true, header_converters: :symbol
+    contents = DataExtractor.extract(hash)
     @enrollments = EnrollmentRepository.new
     @enrollments.load_data(hash)
     contents.each do |row|
       district_existence(row[:location])
     end
-    require "pry"; binding.pry
   end
 
   def district_existence(name)

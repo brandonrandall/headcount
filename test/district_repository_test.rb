@@ -2,8 +2,6 @@ require_relative 'test_helper'
 require_relative '../lib/district_repository'
 require 'csv'
 
-
-
 class DistrictRepositoryTest < Minitest::Test
 
   def test_find_by_name
@@ -17,16 +15,6 @@ class DistrictRepositoryTest < Minitest::Test
     assert_equal "ACADEMY 20", district.name
   end
 
-  def test_district_existence
-    dr = DistrictRepository.new
-    dr.districts["denver"] = District.new({name: "denver"})
-    dr.district_existence("denver")
-    assert_equal 1, dr.districts.keys.length
-
-    dr.district_existence("lakewood")
-    assert_equal 2, dr.districts.keys.length
-  end
-
   def test_find_all_matching
     dr = DistrictRepository.new
     dr.load_data({
@@ -35,7 +23,6 @@ class DistrictRepositoryTest < Minitest::Test
       }
     })
     districts = dr.find_all_matching("aG")
-
     assert_equal 4, districts.count
   end
 
@@ -47,7 +34,6 @@ class DistrictRepositoryTest < Minitest::Test
       }
     })
     districts = dr.find_all_matching("aG")
-
     assert_equal [], districts
   end
 
@@ -58,8 +44,7 @@ class DistrictRepositoryTest < Minitest::Test
         :kindergarten => "./test/fixtures/Kindergartners in full-day program.csv"
       }
     })
-require "pry"; binding.pry
-    assert_equal EnrollmentRepository, dr.enrollment.class
+    assert_equal EnrollmentRepository, dr.enrollments.class
   end
 
 
