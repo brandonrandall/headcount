@@ -1,7 +1,7 @@
 {
   "Unit Tests": {
     "coverage": {
-      "/Users/brandon1985/turing/1module/1608/headcount/lib/district_repository.rb": [
+      "/Users/leesaville/turing/1608/1module/headcount/lib/district_repository.rb": [
         1,
         1,
         1,
@@ -17,11 +17,19 @@
         null,
         null,
         1,
+<<<<<<< HEAD
         10,
         10,
         10,
         10,
         4246,
+=======
+        4,
+        4,
+        4,
+        4,
+        4026,
+>>>>>>> origin/staging
         null,
         null,
         null,
@@ -43,7 +51,7 @@
         null,
         null
       ],
-      "/Users/brandon1985/turing/1module/1608/headcount/lib/district.rb": [
+      "/Users/leesaville/turing/1608/1module/headcount/lib/district.rb": [
         1,
         null,
         1,
@@ -55,17 +63,17 @@
         null,
         null
       ],
-      "/Users/brandon1985/turing/1module/1608/headcount/lib/enrollment_repository.rb": [
+      "/Users/leesaville/turing/1608/1module/headcount/lib/enrollment_repository.rb": [
         1,
         1,
         1,
         1,
         null,
-        null,
         1,
         1,
         1,
         1,
+<<<<<<< HEAD
         12,
         null,
         null,
@@ -73,10 +81,20 @@
         12,
         12,
         6270,
+=======
+        7,
+        null,
+        null,
+        1,
+        7,
+        7,
+        6061,
+>>>>>>> origin/staging
         null,
         null,
         null,
         1,
+<<<<<<< HEAD
         6270,
         6270,
         6270,
@@ -85,27 +103,50 @@
         570,
         null,
         5700,
+=======
+        6061,
+        6061,
+        6061,
+        null,
+        6061,
+        581,
+        null,
+        5480,
+>>>>>>> origin/staging
         null,
         null,
         null,
         1,
+<<<<<<< HEAD
         0,
+=======
+        6061,
+>>>>>>> origin/staging
         null,
         null,
         null,
         1,
+<<<<<<< HEAD
         6658,
+=======
+        6450,
+>>>>>>> origin/staging
         null,
         null,
         null,
         null
       ],
-      "/Users/brandon1985/turing/1module/1608/headcount/lib/enrollment.rb": [
+      "/Users/leesaville/turing/1608/1module/headcount/lib/enrollment.rb": [
         1,
         1,
         1,
+<<<<<<< HEAD
         574,
         574,
+=======
+        585,
+        585,
+>>>>>>> origin/staging
         null,
         null,
         1,
@@ -119,17 +160,21 @@
         null,
         5710,
         null,
+<<<<<<< HEAD
         null,
         1,
         31447,
         null,
+=======
+>>>>>>> origin/staging
         null
       ],
-      "/Users/brandon1985/turing/1module/1608/headcount/lib/data_extractor.rb": [
+      "/Users/leesaville/turing/1608/1module/headcount/lib/data_extractor.rb": [
         1,
         null,
         1,
         1,
+<<<<<<< HEAD
         23,
         23,
         null,
@@ -165,10 +210,22 @@
         1,
         5,
         null,
+=======
+        12,
+        12,
+        null,
+        null,
+        1,
+        13,
+>>>>>>> origin/staging
         null,
         null
       ]
     },
+<<<<<<< HEAD
     "timestamp": 1473900312
+=======
+    "timestamp": 1473887603
+>>>>>>> origin/staging
   }
 }

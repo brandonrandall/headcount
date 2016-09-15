@@ -3,7 +3,7 @@ require_relative '../lib/enrollment_repository'
 
 class EnrollmentRepositoryTest < Minitest::Test
 
-  def test_something
+  def test_find_by_name
     er = EnrollmentRepository.new
     er.load_data({
       :enrollment => {
@@ -12,6 +12,17 @@ class EnrollmentRepositoryTest < Minitest::Test
     })
     enrollment = er.find_by_name("ACADEMY 20")
     assert_equal "ACADEMY 20", enrollment.name
+  end
+
+  def test_inappropriate_search_returns_nil
+    er = EnrollmentRepository.new
+    er.load_data({
+      :enrollment => {
+        :kindergarten => "./test/fixtures/Kindergartners in full-day program.csv"
+      }
+    })
+    enrollment = er.find_by_name("I am not a value in the dataset")
+    assert_equal nil, enrollment
   end
 
   def test_multiple_years_data_in_kindergarten_participation_hash

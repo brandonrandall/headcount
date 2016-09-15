@@ -3,7 +3,6 @@ require 'csv'
 require_relative './enrollment'
 require_relative 'data_extractor'
 
-
 class EnrollmentRepository
   include DataExtractor
   attr_reader :enrollment
