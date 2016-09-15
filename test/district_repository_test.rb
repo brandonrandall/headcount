@@ -46,4 +46,15 @@ class DistrictRepositoryTest < Minitest::Test
     })
     assert_equal EnrollmentRepository, dr.enrollments.class
   end
+
+  def test_a_district_has_an_enrollment
+    dr = DistrictRepository.new
+    dr.load_data({
+      :enrollment => {
+        :kindergarten => "./test/fixtures/Kindergartners in full-day program.csv"
+      }
+    })
+    district = dr.find_by_name("ACADEMY 20")
+    assert_equal 0.436, district.enrollment.kindergarten_participation_in_year(2010)
+  end
 end
