@@ -10,7 +10,6 @@ class DistrictRepository
   attr_reader :districts, :enrollments
   def initialize
     @districts = {}
-    # comment change
   end
 
   def load_data(hash)
