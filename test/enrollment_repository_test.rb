@@ -34,13 +34,12 @@ class EnrollmentRepositoryTest < Minitest::Test
       }
     })
     enrollment = er.find_by_name("academy 20")
-    years = ({2007=>0.391, 2006=>0.353,
+    years =   {2007=>0.391, 2006=>0.353,
               2005=>0.267, 2004=>0.302,
               2008=>0.384, 2009=>0.39,
               2010=>0.436, 2011=>0.489,
               2012=>0.478, 2013=>0.487,
-              2014=>0.490})
-
+              2014=>0.490}
     assert_equal years, enrollment.kindergarten_participation_by_year
   end
 
