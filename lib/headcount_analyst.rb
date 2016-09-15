@@ -10,6 +10,7 @@ class HeadcountAnalyst
     numerator = calculate(name)
     denominator = calculate(against[:against])
     variation = (numerator / denominator).round(3)
+    require "pry"; binding.pry
   end
 
   def calculate(name)
