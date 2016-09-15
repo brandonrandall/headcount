@@ -9,5 +9,4 @@ module DataExtractor
   def self.extract_path(hash)
     hash[:enrollment][:kindergarten]
   end
-
 end
