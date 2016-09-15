@@ -21,7 +21,7 @@ class EnrollmentRepository
   def enrollment_existence(row)
     name = row[:location].upcase
     year = row[:timeframe].to_i
-    percentage = clean(row[:data])
+    percentage = row[:data].to_f
 
     if !find_by_name(name)
       @enrollments[name] = Enrollment.new({:name => name, :kindergarten_participation => {year => percentage}})
