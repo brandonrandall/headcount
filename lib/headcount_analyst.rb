@@ -17,13 +17,13 @@ class HeadcountAnalyst
     a = @district_repository.districts[name].enrollment
     name_comparison = against[:against]
     a.kindergarten_participation_in_year(name_comparison)
-
+    Clean.three_truncate(average)
     numerator =
     denominator =
     trend_variation = (numerator / denominator).round(3)
   end
   def calculate(name)
-    years = @district_repository.find_by_name(name).enrollment.kindergarten_participation_by_year
+    years = @district_repository.find_by_name(name).enrollment.kindergarten_participation
     sum = years.reduce(0) do |sum, (key,value)|
       sum + years[key]
     end
