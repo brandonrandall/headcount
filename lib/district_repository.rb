@@ -22,9 +22,7 @@ class DistrictRepository
   end
 
   def district_existence(name)
-    if !find_by_name(name)
-      @districts[name.upcase] = District.new({name: name, enrollment: @enrollments.find_by_name(name)})
-    end
+    @districts[name.upcase] = District.new({name: name, enrollment: @enrollments.find_by_name(name)}) unless find_by_name(name)
   end
 
   def find_by_name(name)

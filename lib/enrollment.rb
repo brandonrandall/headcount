@@ -1,23 +1,23 @@
+require_relative 'clean'
+
 class Enrollment
-  attr_reader :name, :kindergarten_participation_by_year
+  include Clean
+  attr_reader :name, :kindergarten_participation_by_year, :kindergarten_participation
+
   def initialize(hash)
     @name = hash[:name].upcase
-    @kindergarten_participation_by_year = hash[:kindergarten_participation]
+    @kindergarten_participation = hash[:kindergarten_participation]
   end
 
   def kindergarten_participation_in_year(year)
-    percentage = clean(kindergarten_participation_by_year[year])
+    percentage = Clean.three_truncate(kindergarten_participation_by_year[year])
   end
 
   def kindergarten_participation_by_year
-    kinder = @kindergarten_participation_by_year
+    kinder = @kindergarten_participation
     kinder.each do |key, value|
-      kinder[key] = clean(kinder[key])
+      kinder[key] = Clean.three_truncate(kinder[key])
     end
     kinder
-  end
-
-  def clean(percentage)
-    percentage.to_s[0..4].to_f
   end
 end
