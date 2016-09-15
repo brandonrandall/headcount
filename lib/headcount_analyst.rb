@@ -9,7 +9,7 @@ class HeadcountAnalyst
   def kindergarten_participation_rate_variation(name, against)
     numerator = calculate(name)
     denominator = calculate(against[:against])
-    variation = clean(numerator / denominator)
+    variation = (numerator / denominator).round(3)
   end
 
   def calculate(name)

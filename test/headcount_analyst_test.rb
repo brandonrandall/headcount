@@ -36,7 +36,6 @@ class HeadcountAnalystTest < Minitest::Test
       }
     })
     ha = HeadcountAnalyst.new(dr)
-    binding.pry
     assert_equal 0.406, ha.calculate("ACADEMY 20")
   end
 
@@ -49,6 +48,17 @@ class HeadcountAnalystTest < Minitest::Test
     })
     ha = HeadcountAnalyst.new(dr)
     assert_equal 0.766, ha.kindergarten_participation_rate_variation('ACADEMY 20', :against => 'COLORADO')
+  end
+
+  def test_kindergarten_participation_rate_variation_other_district
+    dr = DistrictRepository.new
+    dr.load_data({
+      :enrollment => {
+        :kindergarten => "./test/fixtures/Kindergartners in full-day program.csv"
+      }
+    })
+    ha = HeadcountAnalyst.new(dr)
+    assert_equal 0.447, ha.kindergarten_participation_rate_variation('ACADEMY 20', :against => 'YUMA SCHOOL DISTRICT 1')
   end
 
 end
