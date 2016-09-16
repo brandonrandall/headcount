@@ -7,7 +7,6 @@ module DataExtractor
   # end
 
   def self.extract(file_data)
-    # require "pry"; binding.pry
     data = file_data[:enrollment]
     contents = {}
     data.each do |key,value|

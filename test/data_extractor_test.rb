@@ -31,6 +31,6 @@ class DataExtractorTest < Minitest::Test
         :kindergarten => "./data/Kindergartners in full-day program.csv"
         }
       }
-    assert_equal "something", DataExtractor.extract(file_data).to_s
+    assert_equal "{:kindergarten=>#<CSV::Table mode:col_or_row row_count:1992>}", DataExtractor.extract(file_data).to_s
   end
 end
