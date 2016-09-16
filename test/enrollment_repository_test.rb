@@ -9,7 +9,7 @@ class EnrollmentRepositoryTest < Minitest::Test
       :enrollment => {
         :kindergarten => "./data/Kindergartners in full-day program.csv"
       }
-    })
+      })
     enrollment = er.find_by_name("ACADEMY 20")
     assert_equal "ACADEMY 20", enrollment.name
   end
