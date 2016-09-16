@@ -33,9 +33,4 @@ class HeadcountAnalyst
     end
     result
   end
-
-  # def clean(percentage)
-  #   percentage.to_s[0..4].to_f
-  # end
-
 end

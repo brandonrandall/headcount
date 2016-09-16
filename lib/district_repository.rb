@@ -12,10 +12,11 @@ class DistrictRepository
     @districts = {}
   end
 
-  def load_data(hash)
-    contents = DataExtractor.extract(hash)
+  def load_data(file_data)
     @enrollments = EnrollmentRepository.new
-    @enrollments.load_data(hash)
+    @enrollments.load_enrollment_data(file_data)
+    contents = DataExtractor.extract(file_data)
+    contents = contents[:kindergarten]
     contents.each do |row|
       district_existence(row[:location])
     end
