@@ -13,10 +13,15 @@ class DistrictRepository
   end
 
   def load_data(file_data)
-    contents = DataExtractor.extract(file_data)
     @enrollments = EnrollmentRepository.new
-    @enrollments.load_data(file_data)
+    # require "pry"; binding.pry
+    @enrollments.load_enrollment_data(file_data)
+    # require "pry"; binding.pry
+    contents = DataExtractor.extract(file_data)
+    contents = contents[:kindergarten]
+    # require "pry"; binding.pry
     contents.each do |row|
+      # require "pry"; binding.pry
       district_existence(row[:location])
     end
   end

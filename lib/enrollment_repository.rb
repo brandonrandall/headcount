@@ -10,20 +10,21 @@ class EnrollmentRepository
     @enrollments = {}
   end
 
-  def load_data(file_data)
-    contents = DataExtractor.extract(file_data)
-    contents.each do |row|
-      enrollment_existence(row)
-    end
-  end
-
   # def load_data(file_data)
   #   contents = DataExtractor.extract(file_data)
-  #   contents.each do |key, value|
-  #     normal_machinery(contents[key])      if key == :kindergarten
-  #     high_school_machinery(contents[key]) if key == :high_school_graduation
+  #   contents.each do |row|
+  #     enrollment_existence(row)
   #   end
   # end
+
+
+  def load_enrollment_data(file_data)
+    contents = DataExtractor.extract(file_data)
+    contents.each do |key, value|
+      normal_machinery(contents[key])      if key == :kindergarten
+      high_school_machinery(contents[key]) if key == :high_school_graduation
+    end
+  end
 
   def normal_machinery(kinder_contents)
     kinder_contents.each do |row|
@@ -66,12 +67,3 @@ class EnrollmentRepository
     @enrollments[name.upcase]
   end
 end
-
-er = EnrollmentRepository.new
-er.load_data({
-  :enrollment => {
-    :kindergarten => "./data/Kindergartners in full-day program.csv",
-    :high_school_graduation => "./data/High school graduation rates.csv"
-    }
-  })
-require "pry"; binding.pry
