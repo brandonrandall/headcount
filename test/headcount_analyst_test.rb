@@ -61,14 +61,32 @@ class HeadcountAnalystTest < Minitest::Test
 
   def test_calculate_high
     assert_equal 0.898, @ha.calculate_high("ACADEMY 20")
+    assert_equal 0.751, @ha.calculate_high("COLORADO")
+  end
+
+  def test_districts_correlation
+    assert_equal true, @ha.districts_correlation(for: "ACADEMY 20")
+  end
+
+  def test_variation_validator
+    assert @ha.variation_validator(0.6)
+    assert @ha.variation_validator(1.5)
+    assert @ha.variation_validator(1.0)
+    refute @ha.variation_validator(0.5)
+    refute @ha.variation_validator(1.6)
+  end
+
+  def test_statewide_validator
+    assert @ha.statewide_validator(0.71)
+    refute @ha.statewide_validator(0.22)
   end
 
   def test_kindergarten_participation_correlates_with_high_school_graduation
-    require "pry"; binding.pry
     assert_equal true, @ha.kindergarten_participation_correlates_with_high_school_graduation(for: 'ACADEMY 20')
   end
 
   def test_correlation_statewide
+    skip
     assert_equal true, @ha.kindergarten_participation_correlates_with_high_school_graduation(:for => 'STATEWIDE')
   end
 end
