@@ -54,6 +54,21 @@ class HeadcountAnalystTest < Minitest::Test
   end
 
   def test_kindergarten_participation_against_high_school_graduation
-    assert_equal 0.853, @ha.kindergarten_participation_against_high_school_graduation("ACADEMY 20")
+    assert_equal 0.641, @ha.kindergarten_participation_against_high_school_graduation("ACADEMY 20")
+    assert_equal 0.548, @ha.kindergarten_participation_against_high_school_graduation('MONTROSE COUNTY RE-1J')
+    assert_equal 0.801, @ha.kindergarten_participation_against_high_school_graduation('STEAMBOAT SPRINGS RE-2')
+  end
+
+  def test_calculate_high
+    assert_equal 0.898, @ha.calculate_high("ACADEMY 20")
+  end
+
+  def test_kindergarten_participation_correlates_with_high_school_graduation
+    require "pry"; binding.pry
+    assert_equal true, @ha.kindergarten_participation_correlates_with_high_school_graduation(for: 'ACADEMY 20')
+  end
+
+  def test_correlation_statewide
+    assert_equal true, @ha.kindergarten_participation_correlates_with_high_school_graduation(:for => 'STATEWIDE')
   end
 end
