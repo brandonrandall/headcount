@@ -1,42 +1,61 @@
 require_relative '../lib/enrollment'
 require 'csv'
 require_relative './enrollment'
+require_relative 'data_extractor'
 
 class EnrollmentRepository
+  include DataExtractor
   attr_reader :enrollment
   def initialize
     @enrollments = {}
   end
 
+  def load_enrollment_data(file_data)
+    contents = DataExtractor.extract(file_data)
+    contents.each do |key, value|
+      normal_machinery(contents[key])      if key == :kindergarten
+      high_school_machinery(contents[key]) if key == :high_school_graduation
+    end
+  end
 
-  def load_data(hash)
-    file = hash[:enrollment][:kindergarten]
-    contents = CSV.read file, headers: true, header_converters: :symbol
-    contents.each do |row|
+  def normal_machinery(kinder_contents)
+    kinder_contents.each do |row|
       enrollment_existence(row)
     end
   end
 
-  def enrollment_existence(row)
-    name = row[:location]
-    year = row[:timeframe].to_i
-    percentage = clean(row[:data])
-
-    if !find_by_name(name)
-      @enrollments[name] = Enrollment.new({:name => name.upcase, :kindergarten_participation => {year => percentage}})
-    else
-      @enrollments[name].kindergarten_participation_by_year[year] = percentage
+  def high_school_machinery(high_contents)
+    high_contents.each do |row|
+      add_high_school_data(row)
     end
   end
 
-  def clean(percentage)
-    percentage.to_s[0..4].to_f
+  def add_high_school_data(row)
+    name, year, percentage = row[:location].upcase, row[:timeframe].to_i, row[:data].to_f
+    @enrollments[name].high_school_graduation[year] = percentage
+  end
+
+
+  def enrollment_existence(row)
+    name, year, percentage = row[:location].upcase, row[:timeframe].to_i, row[:data].to_f
+    add_new_data(name, year, percentage)            if find_by_name(name)
+    add_new_enrollment(name, year, percentage) unless find_by_name(name)
+  end
+
+  def add_new_enrollment(name, year, percentage)
+    @enrollments[name] = create_enrollment(name, year, percentage)
+  end
+
+  def add_new_data(name, year, percentage)
+    @enrollments[name].kindergarten_participation[year] = percentage
+  end
+
+  def create_enrollment(name, year, percentage)
+    Enrollment.new({:name => name, :kindergarten_participation => {year => percentage}})
   end
 
 
   def find_by_name(name)
     @enrollments[name.upcase]
   end
-
-
 end
