@@ -1,10 +1,6 @@
 require 'csv'
 
 module DataExtractor
-  # def self.extract(file_data)
-  #   file = extract_path(file_data)
-  #   contents = CSV.read file, headers: true, header_converters: :symbol
-  # end
 
   def self.extract(file_data)
     data = file_data[:enrollment]
@@ -15,7 +11,4 @@ module DataExtractor
     contents
   end
 
-  def self.extract_path(file_data)
-    file_data[:enrollment][:kindergarten]
-  end
 end
