@@ -59,19 +59,11 @@ class HeadcountAnalyst
   end
 
   def statewide_validator(variation)
-    if variation >= 0.70
-      true
-    else
-      false
-    end
+    variation >= 0.70 ? true : false
   end
 
   def variation_validator(variation)
-    if variation >= 0.6 && variation <= 1.5
-      return true
-    else
-      return false
-    end
+    variation >= 0.6 && variation <= 1.5 ? true : false
   end
 
 end
