@@ -14,7 +14,7 @@ class DistrictRepository
 
   def load_data(file_data)
     @enrollments = EnrollmentRepository.new
-    @enrollments.load_enrollment_data(file_data)
+    @enrollments.load_data(file_data)
     contents = DataExtractor.extract(file_data)
     contents = contents[:kindergarten]
     contents.each do |row|
