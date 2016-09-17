@@ -11,7 +11,7 @@ class EnrollmentRepository
   end
 
   def load_data(file_data)
-    contents = DataExtractor.extract(file_data)
+    contents = DataExtractor.extract(file_data, :enrollment)
     contents.each do |key, value|
       normal_machinery(contents[key])      if key == :kindergarten
       high_school_machinery(contents[key]) if key == :high_school_graduation
