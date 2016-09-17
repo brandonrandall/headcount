@@ -25,7 +25,19 @@ class HeadcountAnalyst
   end
 
   def kindergarten_participation_correlates_with_high_school_graduation(name)
-    name[:for] == "STATEWIDE" ? statewide_correlation : districts_correlation(name)
+    if name.keys[0] == :for
+      correlates_for(name[:for])
+    elsif name.keys[0] == :across
+      correlates_across(name[:across])
+    end
+  end
+
+  def correlates_for(name)
+    name == "STATEWIDE" ? statewide_correlation : districts_correlation(name)
+  end
+
+  def correlates_across(districts)
+    name.each
   end
 
   def calculate(name, type)
@@ -45,7 +57,7 @@ class HeadcountAnalyst
   end
 
   def districts_correlation(name)
-    variation = kindergarten_participation_against_high_school_graduation(name[:for])
+    variation = kindergarten_participation_against_high_school_graduation(name)
     variation_validator(variation)
   end
 

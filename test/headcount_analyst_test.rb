@@ -58,7 +58,8 @@ class HeadcountAnalystTest < Minitest::Test
   end
 
   def test_districts_correlation
-    assert_equal true, @ha.districts_correlation(for: "ACADEMY 20")
+    # require "pry"; binding.pry
+    assert_equal true, @ha.districts_correlation("ACADEMY 20")
   end
 
   def test_variation_validator
@@ -81,4 +82,6 @@ class HeadcountAnalystTest < Minitest::Test
   def test_correlation_statewide
     refute @ha.kindergarten_participation_correlates_with_high_school_graduation(:for => 'STATEWIDE')
   end
+
+  def test_
 end
