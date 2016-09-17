@@ -8,6 +8,4 @@ module Clean
     percentage.round(3)
   end
 
-  
-
 end
