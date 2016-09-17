@@ -10,14 +10,6 @@ class EnrollmentRepository
     @enrollments = {}
   end
 
-  # def load_data(file_data)
-  #   contents = DataExtractor.extract(file_data)
-  #   contents.each do |row|
-  #     enrollment_existence(row)
-  #   end
-  # end
-
-
   def load_enrollment_data(file_data)
     contents = DataExtractor.extract(file_data)
     contents.each do |key, value|
