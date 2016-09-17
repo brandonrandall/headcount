@@ -7,8 +7,8 @@ class HeadcountAnalyst
   end
 
   def kindergarten_participation_rate_variation(name, against)
-    numerator = calculate_kinder(name)
-    denominator = calculate_kinder(against[:against])
+    numerator = calculate(name, "kindergarten_participation")
+    denominator = calculate(against[:against], "kindergarten_participation")
     variation = (numerator / denominator).round(3)
   end
 
@@ -20,7 +20,7 @@ class HeadcountAnalyst
 
   def kindergarten_participation_against_high_school_graduation(name)
     numerator = kindergarten_participation_rate_variation(name, :against => "COLORADO")
-    denominator = calculate_high(name) / calculate_high("COLORADO")
+    denominator = calculate(name, "high_school_graduation") / calculate("COLORADO", "high_school_graduation")
     variation = (numerator / denominator).round(3)
   end
 
@@ -28,16 +28,8 @@ class HeadcountAnalyst
     name[:for] == "STATEWIDE" ? statewide_correlation : districts_correlation(name)
   end
 
-  def calculate_kinder(name) #for a particular district, get kindergarten average across all years
-    years = @district_repository.find_by_name(name).enrollment.kindergarten_participation
-    sum = years.reduce(0) do |sum, (key,value)|
-      sum + years[key]
-    end
-    average = Clean.three_truncate(sum / years.count)
-  end
-
-  def calculate_high(name) #for a particulat district, get high school average across all years
-    years = @district_repository.find_by_name(name).enrollment.high_school_graduation
+  def calculate(name, type)
+    years = @district_repository.find_by_name(name).enrollment.send(type)
     sum = years.reduce(0) do |sum, (key,value)|
       sum + years[key]
     end
@@ -60,7 +52,6 @@ class HeadcountAnalyst
   def statewide_correlation
     sum = 0
     @district_repository.districts.each do |key, value|
-      # require "pry"; binding.pry
       sum += 1 if variation_validator(kindergarten_participation_against_high_school_graduation(key))
     end
     variation = sum.to_f / @district_repository.districts.count
@@ -68,8 +59,7 @@ class HeadcountAnalyst
   end
 
   def statewide_validator(variation)
-    # require "pry"; binding.pry
-    if variation > 0.70
+    if variation >= 0.70
       true
     else
       false

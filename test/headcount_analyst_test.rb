@@ -25,10 +25,6 @@ class HeadcountAnalystTest < Minitest::Test
     assert_equal 0.436, district.enrollment.kindergarten_participation_in_year(2010)
   end
 
-  def test_calculate
-    assert_equal 0.406, @ha.calculate("ACADEMY 20")
-  end
-
   def test_kindergarten_participation_rate_variation
     assert_equal 0.766, @ha.kindergarten_participation_rate_variation('ACADEMY 20', :against => 'COLORADO')
   end
@@ -38,7 +34,9 @@ class HeadcountAnalystTest < Minitest::Test
   end
 
   def test_calculate
-    assert_equal 0.406, @ha.calculate_kinder("ACADEMY 20")
+    assert_equal 0.406, @ha.calculate("ACADEMY 20", "kindergarten_participation")
+    assert_equal 0.898, @ha.calculate("ACADEMY 20", "high_school_graduation")
+    assert_equal 0.751, @ha.calculate("COLORADO", "high_school_graduation")
   end
 
   def test_kindergarten_participation_rate_variation_trend
@@ -57,11 +55,6 @@ class HeadcountAnalystTest < Minitest::Test
     assert_equal 0.641, @ha.kindergarten_participation_against_high_school_graduation("ACADEMY 20")
     assert_equal 0.548, @ha.kindergarten_participation_against_high_school_graduation('MONTROSE COUNTY RE-1J')
     assert_equal 0.801, @ha.kindergarten_participation_against_high_school_graduation('STEAMBOAT SPRINGS RE-2')
-  end
-
-  def test_calculate_high
-    assert_equal 0.898, @ha.calculate_high("ACADEMY 20")
-    assert_equal 0.751, @ha.calculate_high("COLORADO")
   end
 
   def test_districts_correlation
@@ -86,7 +79,6 @@ class HeadcountAnalystTest < Minitest::Test
   end
 
   def test_correlation_statewide
-    skip
-    assert_equal true, @ha.kindergarten_participation_correlates_with_high_school_graduation(:for => 'STATEWIDE')
+    refute @ha.kindergarten_participation_correlates_with_high_school_graduation(:for => 'STATEWIDE')
   end
 end
