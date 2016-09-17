@@ -37,7 +37,10 @@ class HeadcountAnalyst
   end
 
   def correlates_across(districts)
-    name.each
+    results = districts.reduce(0) do |sum, district|
+      sum += 1 if variation_validator(kindergarten_participation_against_high_school_graduation(district))
+    end
+    return group_validator(results / districts.count)
   end
 
   def calculate(name, type)
@@ -67,10 +70,10 @@ class HeadcountAnalyst
       sum += 1 if variation_validator(kindergarten_participation_against_high_school_graduation(key))
     end
     variation = sum.to_f / @district_repository.districts.count
-    statewide_validator(variation)
+    group_validator(variation)
   end
 
-  def statewide_validator(variation)
+  def group_validator(variation)
     variation >= 0.70 ? true : false
   end
 

@@ -57,10 +57,6 @@ class HeadcountAnalystTest < Minitest::Test
     assert_equal 0.801, @ha.kindergarten_participation_against_high_school_graduation('STEAMBOAT SPRINGS RE-2')
   end
 
-  def test_districts_correlation
-    # require "pry"; binding.pry
-    assert_equal true, @ha.districts_correlation("ACADEMY 20")
-  end
 
   def test_variation_validator
     assert @ha.variation_validator(0.6)
@@ -70,18 +66,26 @@ class HeadcountAnalystTest < Minitest::Test
     refute @ha.variation_validator(1.6)
   end
 
-  def test_statewide_validator
-    assert @ha.statewide_validator(0.71)
-    refute @ha.statewide_validator(0.22)
+  def test_group_validator
+    assert @ha.group_validator(0.71)
+    refute @ha.group_validator(0.22)
   end
 
   def test_kindergarten_participation_correlates_with_high_school_graduation
     assert_equal true, @ha.kindergarten_participation_correlates_with_high_school_graduation(for: 'ACADEMY 20')
   end
 
+  def test_districts_correlation
+    assert_equal true, @ha.districts_correlation("ACADEMY 20")
+  end
+
   def test_correlation_statewide
     refute @ha.kindergarten_participation_correlates_with_high_school_graduation(:for => 'STATEWIDE')
   end
 
-  def test_
+  def test_correlation_across
+    districts = ["ACADEMY 20", 'PARK (ESTES PARK) R-3', 'YUMA SCHOOL DISTRICT 1']
+    assert @ha.kindergarten_participation_correlates_with_high_school_graduation(:across => districts)
+  end
+
 end
