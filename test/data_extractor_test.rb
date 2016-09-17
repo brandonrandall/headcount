@@ -4,11 +4,6 @@ require 'csv'
 require 'pry'
 
 class DataExtractorTest < Minitest::Test
-  # def test_extract
-  #   file_data = {:enrollment => {:kindergarten => "./data/Kindergartners in full-day program.csv"}}
-  #   table = DataExtractor.extract(file_data)
-  #   assert_equal CSV::Table, table.class
-  # end
 
   def test_extract_path_gives_file_name
     file_data = {:enrollment => {:kindergarten => "./data/Kindergartners in full-day program.csv"}}
@@ -33,4 +28,5 @@ class DataExtractorTest < Minitest::Test
       }
     assert_equal "{:kindergarten=>#<CSV::Table mode:col_or_row row_count:1992>}", DataExtractor.extract(file_data).to_s
   end
+  
 end
