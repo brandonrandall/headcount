@@ -18,12 +18,6 @@ class EnrollmentRepository
     end
   end
 
-  def normal_machinery(kinder_contents)
-    kinder_contents.each do |row|
-      enrollment_existence(row)
-    end
-  end
-
   def high_school_machinery(high_contents)
     high_contents.each do |row|
       add_high_school_data(row)
@@ -35,10 +29,15 @@ class EnrollmentRepository
     @enrollments[name].high_school_graduation[year] = percentage
   end
 
+  def normal_machinery(kinder_contents)
+    kinder_contents.each do |row|
+      enrollment_existence(row)
+    end
+  end
 
   def enrollment_existence(row)
     name, year, percentage = row[:location].upcase, row[:timeframe].to_i, row[:data].to_f
-    add_new_data(name, year, percentage)            if find_by_name(name)
+    add_new_data(name, year, percentage)           if find_by_name(name)
     add_new_enrollment(name, year, percentage) unless find_by_name(name)
   end
 
@@ -53,7 +52,6 @@ class EnrollmentRepository
   def create_enrollment(name, year, percentage)
     Enrollment.new({:name => name, :kindergarten_participation => {year => percentage}})
   end
-
 
   def find_by_name(name)
     @enrollments[name.upcase]

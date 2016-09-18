@@ -1,11 +1,12 @@
 class StatewideTest
   attr_reader :third_grade, :eighth_grade, :math, :reading, :writing
-  def initialize
-    @third_grade = {}
+  def initialize(name)
+    @name         = name
+    @third_grade  = {}
     @eighth_grade = {}
-    @math = {}
-    @reading = {}
-    @writing = {}
+    @math         = {}
+    @reading      = {}
+    @writing      = {}
   end
 
   # def proficient_by_grade(grade)
