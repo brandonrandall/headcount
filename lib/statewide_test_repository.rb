@@ -24,22 +24,22 @@ class StatewideTestRepository
     when :eighth_grade
       grade(contents, "eighth_grade")
     when :math
-      math_race_data(contents)
+      race_data(contents, "math")
     when :reading
-      puts "reading!"
+      race_data(contents, "reading")
     when :writing
-      puts "writing!"
+      race_data(contents, "writing")
     end
   end
 
-  def math_race_data(contents)
+  def race_data(contents, type)
     contents.each do |row|
-      add_math_race_data(row)
+      add_race_data(row, type)
     end
   end
 
-  def add_math_race_data(row)
-    name, race_ethnicity, year, subject, percentage = row[:location].upcase, Clean.race_ethnicity(row[:race_ethnicity]), row[:timeframe].to_i, :math, row[:data].to_f
+  def add_race_data(row, type)
+    name, race_ethnicity, year, subject, percentage = row[:location].upcase, Clean.race_ethnicity(row[:race_ethnicity]), row[:timeframe].to_i, type.to_sym, row[:data].to_f
     race_ethnicity_check(name, race_ethnicity, year, subject, percentage)
   end
 
@@ -70,7 +70,7 @@ class StatewideTestRepository
   end
 
   def add_by_subject(name, race_ethnicity, year, subject, percentage)
-    @statewide_tests[name].race_ethnicity[race_ethnicity][year][subject] = percentage
+    @statewide_tests[name].race_ethnicity_data[race_ethnicity][year][subject] = percentage
   end
 
   def grade(contents, grade)
