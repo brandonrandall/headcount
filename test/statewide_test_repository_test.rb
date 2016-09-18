@@ -16,7 +16,19 @@ class StatewideTestRepositoryTest < Minitest::Test
     # require "pry"; binding.pry
   end
 
+  def test_new_statewide_test
+    @str.new_statewide_test("TEST", 2999, "math", 9.999)
+    require "pry"; binding.pry
+    assert_equal ({2999=>{:math=>9.999}}), @str.find_by_name("TEST").third_grade
+  end
+
   def test_create_statewide_test
+    statewide_test = @str.create_statewide_test("TEST", 2999, "math", 9.999)
+    require "pry"; binding.pry
+    assert_equal ({2999=>{:math=>9.999}}), statewide_test.third_grade
+  end
+  
+  def test_third_grade_load
     data = {2008=>{:math=>0.697, :reading=>0.703, :writing=>0.501},
        2009=>{:math=>0.691, :reading=>0.726, :writing=>0.536},
        2010=>{:math=>0.706, :reading=>0.698, :writing=>0.504},
@@ -24,7 +36,6 @@ class StatewideTestRepositoryTest < Minitest::Test
        2012=>{:reading=>0.739, :math=>0.71, :writing=>0.525},
        2013=>{:math=>0.72295, :reading=>0.73256, :writing=>0.50947},
        2014=>{:math=>0.71589, :reading=>0.71581, :writing=>0.51072}}
-    require "pry"; binding.pry
     assert_equal data, @str.statewide_tests["COLORADO"].third_grade
   end
 
@@ -36,4 +47,5 @@ class StatewideTestRepositoryTest < Minitest::Test
             2012=>{:math=>0.515, :writing=>0.548, :reading=>0.671}, 2013=>{:math=>0.51482, :reading=>0.66888, :writing=>0.55788}, 2014=>{:math=>0.52385, :reading=>0.66351, :writing=>0.56183}}
     assert_equal data, @str.statewide_tests["COLORADO"].eighth_grade
   end
+
 end

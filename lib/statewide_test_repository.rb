@@ -3,14 +3,13 @@ require_relative "statewide_test"
 
 class StatewideTestRepository
   include DataExtractor
-  attr_reader :statewide_tests
+  attr_reader :statewide_tests, :find_by_name
   def initialize
     @statewide_tests = {}
   end
 
   def load_data(file_data)
     contents = DataExtractor.extract(file_data, :statewide_testing)
-    # require "pry"; binding.pry
     contents.each do |key, value|
       contents_control(key, value)
     end
