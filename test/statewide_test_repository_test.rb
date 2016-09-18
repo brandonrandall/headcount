@@ -16,6 +16,13 @@ class StatewideTestRepositoryTest < Minitest::Test
     # require "pry"; binding.pry
   end
 
+  def test_find_by_name
+    result = @str.find_by_name("ColoRado").third_grade[2014][:math]
+    assert_equal result, 0.71589
+    result = @str.find_by_name("TExas JaCK")
+    assert_equal result, nil
+  end
+
   def test_new_statewide_test
     @str.new_statewide_test("TEST", 2999, "math", 9.999)
     assert_equal ({2999=>{:math=>9.999}}), @str.find_by_name("TEST").third_grade
