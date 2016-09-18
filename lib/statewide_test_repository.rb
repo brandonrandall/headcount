@@ -20,9 +20,9 @@ class StatewideTestRepository
     # require "pry"; binding.pry
     case label
     when :third_grade
-      third_grade(contents)
+      grade(contents, "third_grade")
     when :eighth_grade
-      eighth_grade(contents)
+      grade(contents, "eighth_grade")
     when :math
       puts "math!"
     when :reading
@@ -32,15 +32,9 @@ class StatewideTestRepository
     end
   end
 
-  def third_grade(contents)
+  def grade(contents, grade)
     contents.each do |row|
-      statewide_test_existence(row, "third_grade")
-    end
-  end
-
-  def eighth_grade(contents)
-    contents.each do |row|
-      statewide_test_existence(row, "eighth_grade")
+      statewide_test_existence(row, grade)
     end
   end
 
