@@ -22,7 +22,7 @@ class StatewideTestRepository
     when :third_grade
       third_grade(contents)
     when :eighth_grade
-      puts "eighth grade!"
+      eighth_grade(contents)
     when :math
       puts "math!"
     when :reading
@@ -33,26 +33,30 @@ class StatewideTestRepository
   end
 
   def third_grade(contents)
-    #make it and load it
     contents.each do |row|
-      # require "pry"; binding.pry
-      statewide_test_existence(row)
+      statewide_test_existence(row, "third_grade")
     end
   end
 
-  def statewide_test_existence(row)
+  def eighth_grade(contents)
+    contents.each do |row|
+      statewide_test_existence(row, "eighth_grade")
+    end
+  end
+
+  def statewide_test_existence(row, grade)
     # require "pry"; binding.pry
     name, year, subject, percentage = row[:location].upcase, row[:timeframe].to_i, row[:score].downcase, row[:data].to_f
-    new_data(name, year, subject, percentage)           if find_by_name(name)
+    new_data(name, year, subject, percentage, grade)           if find_by_name(name)
     new_statewide_test(name, year, subject, percentage) unless find_by_name(name)
   end
 
-  def new_data(name, year, subject, percentage)
+  def new_data(name, year, subject, percentage, grade)
     # require "pry"; binding.pry
-    if @statewide_tests[name].third_grade.keys.include?(year)
-      @statewide_tests[name].third_grade[year][subject.to_sym] = percentage
+    if @statewide_tests[name].send(grade).keys.include?(year)
+      @statewide_tests[name].send(grade)[year][subject.to_sym] = percentage
     else
-      @statewide_tests[name].third_grade[year] = {subject.to_sym => percentage}
+      @statewide_tests[name].send(grade)[year] = {subject.to_sym => percentage}
     end
   end
 

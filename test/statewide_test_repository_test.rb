@@ -24,7 +24,16 @@ class StatewideTestRepositoryTest < Minitest::Test
        2012=>{:reading=>0.739, :math=>0.71, :writing=>0.525},
        2013=>{:math=>0.72295, :reading=>0.73256, :writing=>0.50947},
        2014=>{:math=>0.71589, :reading=>0.71581, :writing=>0.51072}}
-    # require "pry"; binding.pry
+    require "pry"; binding.pry
     assert_equal data, @str.statewide_tests["COLORADO"].third_grade
+  end
+
+  def test_eighth_grade_load
+    data = {2008=>{:math=>0.469, :reading=>0.703, :writing=>0.529},
+            2009=>{:math=>0.499, :reading=>0.726, :writing=>0.528},
+            2010=>{:math=>0.51, :reading=>0.679, :writing=>0.549},
+            2011=>{:reading=>0.67, :math=>0.513, :writing=>0.543},
+            2012=>{:math=>0.515, :writing=>0.548, :reading=>0.671}, 2013=>{:math=>0.51482, :reading=>0.66888, :writing=>0.55788}, 2014=>{:math=>0.52385, :reading=>0.66351, :writing=>0.56183}}
+    assert_equal data, @str.statewide_tests["COLORADO"].eighth_grade
   end
 end
