@@ -8,4 +8,14 @@ module Clean
     percentage.round(3)
   end
 
+  def self.race_ethnicity(race_ethnicity)
+    race_ethnicity = race_ethnicity.downcase
+    if race_ethnicity == "hawaiian/pacific islander"
+      race_ethnicity.gsub!("hawaiian/", "")
+      race_ethnicity.gsub!(" ", "_").to_sym
+    else
+      race_ethnicity.gsub!(" ", "_").to_sym
+    end
+  end
+
 end
