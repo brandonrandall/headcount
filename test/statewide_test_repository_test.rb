@@ -48,9 +48,11 @@ class StatewideTestRepositoryTest < Minitest::Test
     assert_equal data, @str.statewide_tests["COLORADO"].eighth_grade
   end
 
-  def test_race_math_load
-    data = {2011=>{:math=>0.5573}, 2012=>{:math=>0.558}, 2013=>{:math=>0.5668}, 2014=>{:math=>0.5635}}
-    assert_equal data, @str.statewide_tests["COLORADO"].race_ethnicity_data[:all_students]
+  def test_race_load
+    data = {2011=>{:math=>0.5681, :reading=>0.7486, :writing=>0.6068},
+            2012=>{:math=>0.5722, :reading=>0.77167, :writing=>0.5978},
+            2013=>{:math=>0.5883, :reading=>0.77278, :writing=>0.623},
+            2014=>{:math=>0.6048, :reading=>0.00778, :writing=>0.6244}}
+    assert_equal data, @str.statewide_tests["ACADEMY 20"].race_ethnicity_data[:hispanic]
   end
-
 end
