@@ -18,13 +18,11 @@ class StatewideTestRepositoryTest < Minitest::Test
 
   def test_new_statewide_test
     @str.new_statewide_test("TEST", 2999, "math", 9.999)
-    require "pry"; binding.pry
     assert_equal ({2999=>{:math=>9.999}}), @str.find_by_name("TEST").third_grade
   end
 
   def test_create_statewide_test
     statewide_test = @str.create_statewide_test("TEST", 2999, "math", 9.999)
-    require "pry"; binding.pry
     assert_equal ({2999=>{:math=>9.999}}), statewide_test.third_grade
   end
 
@@ -55,4 +53,29 @@ class StatewideTestRepositoryTest < Minitest::Test
             2014=>{:math=>0.6048, :reading=>0.00778, :writing=>0.6244}}
     assert_equal data, @str.statewide_tests["ACADEMY 20"].race_ethnicity_data[:hispanic]
   end
+
+  def test_add_by_ethnicity
+    result = @str.add_by_ethnicity("COLORADO", :all_students, 1995, :reading, 0.00000)
+    assert_equal result, @str.statewide_tests["COLORADO"].race_ethnicity_data[:all_students]
+  end
+
+  def test_add_by_year
+    @str.add_by_year("ACADEMY 20", :all_students, 2003, :writing, 234.3)
+    data = {2011=>{:math=>0.68, :reading=>0.83, :writing=>0.7192},
+            2012=>{:math=>0.6894, :reading=>0.84585, :writing=>0.70593},
+            2013=>{:math=>0.69683, :reading=>0.84505, :writing=>0.72029},
+            2014=>{:math=>0.69944, :reading=>0.84127, :writing=>0.71583},
+            2003=>{:writing=>234.3}}
+    assert_equal data, @str.statewide_tests["ACADEMY 20"].race_ethnicity_data[:all_students]
+  end
+
+  def test_add_by_subject #this and perhaps others could skew results... it was done out of context
+    @str.add_by_subject("ACADEMY 20", :hispanic, 2011, :math, 34.5)
+    data = {2011=>{:math=>34.5, :reading=>0.7486, :writing=>0.6068},
+            2012=>{:math=>0.5722, :reading=>0.77167, :writing=>0.5978},
+            2013=>{:math=>0.5883, :reading=>0.77278, :writing=>0.623},
+            2014=>{:math=>0.6048, :reading=>0.00778, :writing=>0.6244}}
+    assert_equal data, @str.statewide_tests["ACADEMY 20"].race_ethnicity_data[:hispanic]
+  end
+
 end
