@@ -11,11 +11,12 @@ module Clean
   def self.race_ethnicity(race_ethnicity)
     race_ethnicity = race_ethnicity.downcase
     if race_ethnicity == "hawaiian/pacific islander"
-      race_ethnicity.gsub!("hawaiian/", "")
-      race_ethnicity.gsub!(" ", "_").to_sym
+      race_ethnicity = race_ethnicity.gsub("hawaiian/", "")
+      race_ethnicity = race_ethnicity.gsub(" ", "_").to_sym
     else
-      race_ethnicity.gsub!(" ", "_").to_sym
+      race_ethnicity = race_ethnicity.gsub(" ", "_").to_sym
     end
+    race_ethnicity
   end
 
 end

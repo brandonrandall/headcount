@@ -21,6 +21,7 @@ class CleanerTest < Minitest::Test
     assert_equal :pacific_islander, Clean.race_ethnicity("Hawaiian/Pacific Islander")
     assert_equal :all_students, Clean.race_ethnicity("All Students")
     assert_equal :two_or_more, Clean.race_ethnicity("Two or More")
+    assert_equal :asian, Clean.race_ethnicity("Asian")
   end
 
 end
