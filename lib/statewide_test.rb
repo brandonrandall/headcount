@@ -1,10 +1,10 @@
 class StatewideTest
-  attr_reader :third_grade, :eighth_grade, :race_data
+  attr_reader :third_grade, :eighth_grade, :race_ethnicity_data
   def initialize(name)
     @name         = name
     @third_grade  = {}
     @eighth_grade = {}
-    @race_data = {}
+    @race_ethnicity_data = {}
   end
 
   # def proficient_by_grade(grade)

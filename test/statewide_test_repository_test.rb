@@ -27,7 +27,7 @@ class StatewideTestRepositoryTest < Minitest::Test
     require "pry"; binding.pry
     assert_equal ({2999=>{:math=>9.999}}), statewide_test.third_grade
   end
-  
+
   def test_third_grade_load
     data = {2008=>{:math=>0.697, :reading=>0.703, :writing=>0.501},
        2009=>{:math=>0.691, :reading=>0.726, :writing=>0.536},
@@ -46,6 +46,11 @@ class StatewideTestRepositoryTest < Minitest::Test
             2011=>{:reading=>0.67, :math=>0.513, :writing=>0.543},
             2012=>{:math=>0.515, :writing=>0.548, :reading=>0.671}, 2013=>{:math=>0.51482, :reading=>0.66888, :writing=>0.55788}, 2014=>{:math=>0.52385, :reading=>0.66351, :writing=>0.56183}}
     assert_equal data, @str.statewide_tests["COLORADO"].eighth_grade
+  end
+
+  def test_race_math_load
+    data = {2011=>{:math=>0.5573}, 2012=>{:math=>0.558}, 2013=>{:math=>0.5668}, 2014=>{:math=>0.5635}}
+    assert_equal data, @str.statewide_tests["COLORADO"].race_ethnicity_data[:all_students]
   end
 
 end
