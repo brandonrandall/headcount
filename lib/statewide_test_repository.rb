@@ -41,26 +41,28 @@ class StatewideTestRepository
   end
 
   def statewide_test_existence(row)
-    require "pry"; binding.pry
+    # require "pry"; binding.pry
     name, year, subject, percentage = row[:location].upcase, row[:timeframe].to_i, row[:score].downcase, row[:data].to_f
     new_data(name, year, subject, percentage)           if find_by_name(name)
     new_statewide_test(name, year, subject, percentage) unless find_by_name(name)
   end
 
   def new_data(name, year, subject, percentage)
-    require "pry"; binding.pry
-    @statewide_tests[name].third_grade[year] = {subject.to_sym => percentage}
+    # require "pry"; binding.pry
+    if @statewide_tests[name].third_grade.keys.include?(year)
+      @statewide_tests[name].third_grade[year][subject.to_sym] = percentage
+    else
+      @statewide_tests[name].third_grade[year] = {subject.to_sym => percentage}
+    end
   end
 
   def new_statewide_test(name, year, subject, percentage)
-    require "pry"; binding.pry
     @statewide_tests[name] = create_statewide_test(name, year, subject, percentage)
   end
 
   def create_statewide_test(name, year, subject, percentage)
     statewide_test = StatewideTest.new(name)
     statewide_test.third_grade[year] = {subject.to_sym => percentage}
-    require "pry"; binding.pry
     return statewide_test
   end
 

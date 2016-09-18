@@ -13,18 +13,18 @@ class StatewideTestRepositoryTest < Minitest::Test
         :writing => "./test/fixtures/Average proficiency on the CSAP_TCAP by race_ethnicity_ Writing.csv"
       }
     })
-    require "pry"; binding.pry
-  end
-
-  def test_new_statewide_test
-    @str.new_statewide_test("Colorado", "2008", "Math", "0.697")
-    assert_equal ({"2008"=>{:math=>"0.697"}}), @str.statewide_tests["Colorado"].third_grade
+    # require "pry"; binding.pry
   end
 
   def test_create_statewide_test
-    @str.create_statewide_test("Colorado", "2008", "Math", "0.697")
-    statewide_test = "#<StatewideTest:0x007f96b0cc8758 @eighth_grade={}, @math={}, @name='COLORADO', @reading={}, @third_grade={'2008'=>{:math=>'0.697'}}, @writing={}>"
+    data = {2008=>{:math=>0.697, :reading=>0.703, :writing=>0.501},
+       2009=>{:math=>0.691, :reading=>0.726, :writing=>0.536},
+       2010=>{:math=>0.706, :reading=>0.698, :writing=>0.504},
+       2011=>{:math=>0.696, :reading=>0.728, :writing=>0.513},
+       2012=>{:reading=>0.739, :math=>0.71, :writing=>0.525},
+       2013=>{:math=>0.72295, :reading=>0.73256, :writing=>0.50947},
+       2014=>{:math=>0.71589, :reading=>0.71581, :writing=>0.51072}}
     # require "pry"; binding.pry
-    assert_equal statewide_test, @str.statewide_tests["Colorado"].to_s
+    assert_equal data, @str.statewide_tests["COLORADO"].third_grade
   end
 end
