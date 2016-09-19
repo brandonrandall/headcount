@@ -8,7 +8,6 @@ class StatewideTest
   end
 
   def proficient_by_grade(grade)
-    # require "pry"; binding.pry
     if grade == 3
       third_grade_polish
     elsif grade == 8

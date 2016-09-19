@@ -13,7 +13,6 @@ class StatewideTestRepositoryTest < Minitest::Test
         :writing => "./test/fixtures/Average proficiency on the CSAP_TCAP by race_ethnicity_ Writing.csv"
       }
     })
-    # require "pry"; binding.pry
   end
 
   def test_find_by_name
