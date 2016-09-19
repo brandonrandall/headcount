@@ -13,13 +13,17 @@ class DistrictRepository
   end
 
   def load_data(file_data)
-    @enrollments = EnrollmentRepository.new
-    @enrollments.load_data(file_data)
+    create_and_load_enrollments(file_data)
     contents = DataExtractor.extract(file_data, :enrollment)
     contents = contents[:kindergarten]
     contents.each do |row|
       district_existence(row[:location])
     end
+  end
+
+  def create_and_load_enrollments(file_data)
+    @enrollments = EnrollmentRepository.new
+    @enrollments.load_data(file_data)
   end
 
   def district_existence(name)
