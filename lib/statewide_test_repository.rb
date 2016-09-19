@@ -80,7 +80,7 @@ class StatewideTestRepository
   end
 
   def statewide_test_existence(row, grade)
-    name, year, subject, percentage = row[:location].upcase, row[:timeframe].to_i, row[:score].downcase, row[:data].to_f
+    name, year, subject, percentage = row[:location].upcase, row[:timeframe].to_i, row[:score].downcase, Clean.percentage(row[:data])
     new_data(name, year, subject, percentage, grade)           if find_by_name(name)
     new_statewide_test(name, year, subject, percentage) unless find_by_name(name)
   end

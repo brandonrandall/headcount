@@ -40,16 +40,16 @@ class StatewideTestTest < Minitest::Test
               2010 => {:math => 0.849, :reading => 0.864, :writing => 0.662},
               2011 => {:math => 0.819, :reading => 0.867, :writing => 0.678},
               2012 => {:math => 0.830, :reading => 0.870, :writing => 0.655},
-              2013 => {:math => 0.855, :reading => 0.859, :writing => 0.668},
-              2014 => {:math => 0.834, :reading => 0.831, :writing => 0.639}}
+              2013 => {:math => 0.855, :reading => 0.859, :writing => 0.669},
+              2014 => {:math => 0.835, :reading => 0.831, :writing => 0.639}}
 
     data2 = { 2008=>{:math=>0.64, :reading=>0.843, :writing=>0.734},
               2009=>{:math=>0.656, :reading=>0.825, :writing=>0.701},
               2010=>{:math=>0.672, :reading=>0.863, :writing=>0.754},
-              2011=>{:reading=>0.832, :math=>0.653, :writing=>0.745},
-              2012=>{:math=>0.681, :writing=>0.738, :reading=>0.833},
-              2013=>{:math=>0.661, :reading=>0.852, :writing=>0.75},
-              2014=>{:math=>0.684, :reading=>0.827, :writing=>0.747} }
+              2011=>{:reading=>0.832, :math=>0.653, :writing=>0.746},
+              2012=>{:math=>0.682, :writing=>0.738, :reading=>0.834},
+              2013=>{:math=>0.661, :reading=>0.853, :writing=>0.751},
+              2014=>{:math=>0.685, :reading=>0.827, :writing=>0.748} }
 
     statewide_test = @str.find_by_name("ACADEMY 20")
     assert_equal data1, statewide_test.proficient_by_grade(3)
@@ -57,9 +57,9 @@ class StatewideTestTest < Minitest::Test
   end
 
   def test_proficient_by_race_or_ethnicity
-    data = { 2011 => {math: 0.816, reading: 0.897, writing: 0.826},
+    data = { 2011 => {math: 0.817, reading: 0.898, writing: 0.827},
              2012 => {math: 0.818, reading: 0.893, writing: 0.808},
-             2013 => {math: 0.805, reading: 0.901, writing: 0.810},
+             2013 => {math: 0.805, reading: 0.902, writing: 0.811},
              2014 => {math: 0.800, reading: 0.855, writing: 0.789} }
     statewide_test = @str.find_by_name("ACADEMY 20")
     assert_equal data, statewide_test.proficient_by_race_or_ethnicity(:asian)

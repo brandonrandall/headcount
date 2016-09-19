@@ -21,7 +21,7 @@ class StatewideTest
   def third_grade_polish
     third_grade = @third_grade.each do |year, data|
       data.each do |subject, percentage|
-        data[subject] = Clean.three_truncate(percentage)
+        data[subject] = Clean.three_round(percentage)
       end
     end
     third_grade
@@ -30,7 +30,7 @@ class StatewideTest
   def eighth_grade_polish
     eighth_grade = @eighth_grade.each do |year, data|
       data.each do |subject, percentage|
-        data[subject] = Clean.three_truncate(percentage)
+        data[subject] = Clean.three_round(percentage)
       end
     end
     eighth_grade
@@ -40,24 +40,28 @@ class StatewideTest
     raise UnknownRaceError, "Unknown race" unless races.include?(race)
     race_data = @race_ethnicity_data[race].each do |year, data|
       data.each do |subject, percentage|
-        data[subject] = Clean.three_truncate(percentage)
+        data[subject] = Clean.three_round(percentage)
       end
     end
     race_data
   end
 
   def proficient_for_subject_by_grade_in_year(subject, grade, year)
-    raise UnknownDataError, "Invalid subject" unless [:math, :reading, :writing].include?(subject)
+    raise UnknownDataError, "Invalid parameter" unless [:math, :reading, :writing].include?(subject)
+    raise UnknownDataError, "Invalid parameter" unless [3,8].include?(grade)
+    raise UnknownDataError, "Invalid parameter" unless [2008, 2009, 2010, 2011, 2012, 2013, 2014].include?(year)
     if grade == 3
-      Clean.three_truncate(@third_grade[year][subject])
+      Clean.three_round(@third_grade[year][subject])
     elsif grade == 8
-      Clean.three_truncate(@eighth_grade[year][subject])
+      Clean.three_round(@eighth_grade[year][subject])
     end
   end
 
   def proficient_for_subject_by_race_in_year(subject, race, year)
-    raise UnknownDataError, "Invalid subject" unless [:math, :reading, :writing].include?(subject)
-    Clean.three_truncate(@race_ethnicity_data[race][year][subject])
+    raise UnknownDataError, "Invalid parameter" unless [:math, :reading, :writing].include?(subject)
+    raise UnknownDataError, "Invalid parameter" unless @races.include?(race)
+    raise UnknownDataError, "Invalid parameter" unless [2008, 2009, 2010, 2011, 2012, 2013, 2014].include?(year)
+    Clean.three_round(@race_ethnicity_data[race][year][subject])
   end
 
 end
