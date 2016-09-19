@@ -36,7 +36,7 @@ class DistrictRepository
   end
 
   def district_existence(name)
-    if @statewide_tests.empty?
+    if @statewide_tests.is_a?(Hash)
       data = {name: name, enrollment: @enrollments.find_by_name(name)}
     else
       data = {name: name, enrollment: @enrollments.find_by_name(name), statewide_test: @statewide_tests.find_by_name(name)}
