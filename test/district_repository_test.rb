@@ -10,7 +10,9 @@ class DistrictRepositoryTest < Minitest::Test
         :kindergarten => "./test/fixtures/Kindergartners in full-day program.csv"
       }
     })
+    # require "pry"; binding.pry
   end
+
   def test_find_by_name
     district = @dr.find_by_name("ACADEMY 20")
     assert_equal "ACADEMY 20", district.name
