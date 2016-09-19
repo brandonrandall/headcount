@@ -5,7 +5,12 @@ module Clean
   end
 
   def self.three_round(percentage)
-    percentage.round(3)
+    if percentage.class == Float
+      percentage.round(3)
+    else
+      percentage
+    end
+
   end
 
   def self.race_ethnicity(race_ethnicity)
@@ -17,6 +22,16 @@ module Clean
       race_ethnicity = race_ethnicity.gsub(" ", "_").to_sym
     end
     race_ethnicity
+  end
+
+  def self.percentage(percentage)
+    if percentage == "N/A" 
+      percentage
+    elsif percentage == "LNE"
+      percentage = "N/A"
+    else
+      percentage = percentage.to_f
+    end
   end
 
 end
