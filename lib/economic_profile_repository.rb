@@ -16,7 +16,7 @@ class EconomicProfileRepository
     case label
     when :median_household_income
       require "pry"; binding.pry
-      puts "median household income!"
+      median_income(contents)
     when :children_in_poverty
       puts "children_in_poverty!"
     when :free_or_reduced_price_lunch
@@ -24,6 +24,18 @@ class EconomicProfileRepository
     when :title_i
       puts "title one!"
     end
+  end
+
+  def median_income(contents)
+    require "pry"; binding.pry
+    contents.each do |row|
+      economic_profile_existence(row)
+    end
+  end
+
+  def economic_profile_existence(row)
+    #if the economic_profile doesn't exist, make it with the data
+    #otherwise, add the data to it (using median income data)
   end
 
 

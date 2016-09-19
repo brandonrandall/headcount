@@ -6,12 +6,13 @@ class EconomicProfileRepositoryTest < MiniTest::Test
     @epr = EconomicProfileRepository.new
     @epr.load_data({
         :economic_profile => {
-          :median_household_income => "./data/Median household income.csv",
-          :children_in_poverty => "./data/School-aged children in poverty.csv",
-          :free_or_reduced_price_lunch => "./data/Students qualifying for free or reduced price lunch.csv",
-          :title_i => "./data/Title I students.csv"
+          :median_household_income => "./test/fixtures/Median household income.csv",
+          :children_in_poverty => "./test/fixtures/School-aged children in poverty.csv",
+          :free_or_reduced_price_lunch => "./test/fixtures/Students qualifying for free or reduced price lunch.csv",
+          :title_i => "./test/fixtures/Title I students.csv"
           }})
   end
+
   def test_it_exists
     assert_instance_of EconomicProfileRepository, @epr
   end

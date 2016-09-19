@@ -1,7 +1,4 @@
-require 'minitest/autorun'
 require_relative 'test_helper'
-require 'pry'
-require 'minitest/pride'
 require_relative '../lib/clean'
 
 class CleanerTest < Minitest::Test
