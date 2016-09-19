@@ -61,7 +61,6 @@ class StatewideTestTest < Minitest::Test
              2012 => {math: 0.818, reading: 0.893, writing: 0.808},
              2013 => {math: 0.805, reading: 0.901, writing: 0.810},
              2014 => {math: 0.800, reading: 0.855, writing: 0.789} }
-
     statewide_test = @str.find_by_name("ACADEMY 20")
     assert_equal data, statewide_test.proficient_by_race_or_ethnicity(:asian)
   end
@@ -72,8 +71,9 @@ class StatewideTestTest < Minitest::Test
     assert_equal 0.827, statewide_test.proficient_for_subject_by_grade_in_year(:reading, 8, 2014)
   end
 
-  def test_proficient_for_subject_by_grade_in_year
+  def test_proficient_for_subject_by_race_in_year
     statewide_test = @str.find_by_name("ACADEMY 20")
     assert_equal 0.818, statewide_test.proficient_for_subject_by_race_in_year(:math, :asian, 2012)
   end
+
 end
