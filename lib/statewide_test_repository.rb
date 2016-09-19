@@ -39,7 +39,11 @@ class StatewideTestRepository
   end
 
   def add_race_data(row, type)
-    name, race_ethnicity, year, subject, percentage = row[:location].upcase, Clean.race_ethnicity(row[:race_ethnicity]), row[:timeframe].to_i, type.to_sym, row[:data].to_f
+    name = row[:location].upcase
+    race_ethnicity = Clean.race_ethnicity(row[:race_ethnicity])
+    year = row[:timeframe].to_i
+    subject = type.to_sym
+    percentage = row[:data].to_f
     race_ethnicity_check(name, race_ethnicity, year, subject, percentage)
   end
 
@@ -80,9 +84,10 @@ class StatewideTestRepository
   end
 
   def statewide_test_existence(row, grade)
-    name, year, subject, percentage = row[:location].upcase, row[:timeframe].to_i, row[:score].downcase, Clean.percentage(row[:data])
-    new_data(name, year, subject, percentage, grade)    if find_by_name(name)
-    new_statewide_test(name, year, subject, percentage) unless find_by_name(name)
+    name, year = row[:location].upcase, row[:timeframe].to_i
+    subject, percentage = row[:score].downcase, Clean.percentage(row[:data])
+    new_data(name, year, subject, percentage, grade) if find_by_name(name)
+    new_statewide(name, year, subject, percentage)   unless find_by_name(name)
   end
 
   def new_data(name, year, subject, percentage, grade)
@@ -93,11 +98,11 @@ class StatewideTestRepository
     end
   end
 
-  def new_statewide_test(name, year, subject, percentage)
-    @statewide_tests[name] = create_statewide_test(name, year, subject, percentage)
+  def new_statewide(name, year, subject, percentage)
+    @statewide_tests[name] = create_statewide(name, year, subject, percentage)
   end
 
-  def create_statewide_test(name, year, subject, percentage)
+  def create_statewide(name, year, subject, percentage)
     statewide_test = StatewideTest.new(name)
     statewide_test.third_grade[year] = {subject.to_sym => percentage}
     return statewide_test

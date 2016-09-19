@@ -23,12 +23,12 @@ class StatewideTestRepositoryTest < Minitest::Test
   end
 
   def test_new_statewide_test
-    @str.new_statewide_test("TEST", 2999, "math", 9.999)
+    @str.new_statewide("TEST", 2999, "math", 9.999)
     assert_equal ({2999=>{:math=>9.999}}), @str.find_by_name("TEST").third_grade
   end
 
   def test_create_statewide_test
-    statewide_test = @str.create_statewide_test("TEST", 2999, "math", 9.999)
+    statewide_test = @str.create_statewide("TEST", 2999, "math", 9.999)
     assert_equal ({2999=>{:math=>9.999}}), statewide_test.third_grade
   end
 

@@ -10,7 +10,6 @@ module Clean
     else
       percentage
     end
-
   end
 
   def self.race_ethnicity(race_ethnicity)
@@ -25,7 +24,7 @@ module Clean
   end
 
   def self.percentage(percentage)
-    if percentage == "N/A" 
+    if percentage == "N/A"
       percentage
     elsif percentage == "LNE"
       percentage = "N/A"
@@ -34,4 +33,7 @@ module Clean
     end
   end
 
+  def self.timeframe(timeframe)
+    result = timeframe.split('-').map { |year| year.to_i }
+  end
 end
