@@ -7,37 +7,48 @@ class HeadcountAnalyst
   end
 
   def kindergarten_participation_rate_variation(name, against)
-    numerator = calculate_kinder(name)
-    denominator = calculate_kinder(against[:against])
+    numerator = calculate(name, "kindergarten_participation")
+    denominator = calculate(against[:against], "kindergarten_participation")
     variation = (numerator / denominator).round(3)
-  end
-
-  def kindergarten_participation_against_high_school_graduation(name)
-    numerator = kindergarten_participation_rate_variation(name, :against => "COLORADO")
-    denominator = calculate_high(name) / calculate_high("COLORADO")
-    variation = (numerator / denominator).round(3)
-  end
-
-  def calculate_kinder(name)
-    years = @district_repository.find_by_name(name).enrollment.kindergarten_participation
-    sum = years.reduce(0) do |sum, (key,value)|
-      sum + years[key]
-    end
-    average = Clean.three_truncate(sum / years.count)
-  end
-
-  def calculate_high(name)
-    years = @district_repository.find_by_name(name).enrollment.high_school_graduation
-    sum = years.reduce(0) do |sum, (key,value)|
-      sum + years[key]
-    end
-    average = Clean.three_truncate(sum / years.count)
   end
 
   def kindergarten_participation_rate_variation_trend(name, against)
     numerator = @district_repository.find_by_name(name).enrollment.kindergarten_participation
     denominator = @district_repository.find_by_name(against[:against]).enrollment.kindergarten_participation
     variation_trend_calculator(numerator, denominator)
+  end
+
+  def kindergarten_participation_against_high_school_graduation(name)
+    numerator = kindergarten_participation_rate_variation(name, :against => "COLORADO")
+    denominator = calculate(name, "high_school_graduation") / calculate("COLORADO", "high_school_graduation")
+    variation = (numerator / denominator).round(3)
+  end
+
+  def kindergarten_participation_correlates_with_high_school_graduation(name)
+    if name.keys[0] == :for
+      correlates_for(name[:for])
+    elsif name.keys[0] == :across
+      correlates_across(name[:across])
+    end
+  end
+
+  def correlates_for(name)
+    name == "STATEWIDE" ? statewide_correlation : districts_correlation(name)
+  end
+
+  def correlates_across(districts)
+    results = districts.reduce(0) do |sum, district|
+      sum += 1 if variation_validator(kindergarten_participation_against_high_school_graduation(district))
+    end
+    return group_validator(results / districts.count)
+  end
+
+  def calculate(name, type)
+    years = @district_repository.find_by_name(name).enrollment.send(type)
+    sum = years.reduce(0) do |sum, (key,value)|
+      sum + years[key]
+    end
+    average = Clean.three_truncate(sum / years.count)
   end
 
   def variation_trend_calculator(numerator, denominator)
@@ -48,31 +59,26 @@ class HeadcountAnalyst
     result
   end
 
-  def kindergarten_participation_correlates_with_high_school_graduation(name)
-    name[:for] == "STATEWIDE" ? statewide_correlation : districts_correlation(name)
-  end
-
   def districts_correlation(name)
-    variation = kindergarten_participation_against_high_school_graduation(name[:for])
+    variation = kindergarten_participation_against_high_school_graduation(name)
     variation_validator(variation)
   end
 
   def statewide_correlation
-    require "pry"; binding.pry
     sum = 0
     @district_repository.districts.each do |key, value|
       sum += 1 if variation_validator(kindergarten_participation_against_high_school_graduation(key))
     end
-    variation = sum / @district_repository.districts.count
-    variation_validator(variation)
+    variation = sum.to_f / @district_repository.districts.count
+    group_validator(variation)
+  end
+
+  def group_validator(variation)
+    variation >= 0.70 ? true : false
   end
 
   def variation_validator(variation)
-    if variation >= 0.6 && variation <= 1.5
-      return true
-    else
-      return false
-    end
+    variation >= 0.6 && variation <= 1.5 ? true : false
   end
 
 end

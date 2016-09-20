@@ -1,7 +1,7 @@
+require_relative 'test_helper'
 require_relative '../lib/enrollment'
 require 'csv'
 require_relative '../lib/district_repository'
-require_relative 'test_helper'
 require_relative '../lib/headcount_analyst'
 
 class HeadcountAnalystTest < Minitest::Test
@@ -25,10 +25,6 @@ class HeadcountAnalystTest < Minitest::Test
     assert_equal 0.436, district.enrollment.kindergarten_participation_in_year(2010)
   end
 
-  def test_calculate
-    assert_equal 0.406, @ha.calculate("ACADEMY 20")
-  end
-
   def test_kindergarten_participation_rate_variation
     assert_equal 0.766, @ha.kindergarten_participation_rate_variation('ACADEMY 20', :against => 'COLORADO')
   end
@@ -38,7 +34,9 @@ class HeadcountAnalystTest < Minitest::Test
   end
 
   def test_calculate
-    assert_equal 0.406, @ha.calculate_kinder("ACADEMY 20")
+    assert_equal 0.406, @ha.calculate("ACADEMY 20", "kindergarten_participation")
+    assert_equal 0.898, @ha.calculate("ACADEMY 20", "high_school_graduation")
+    assert_equal 0.751, @ha.calculate("COLORADO", "high_school_graduation")
   end
 
   def test_kindergarten_participation_rate_variation_trend
@@ -59,16 +57,35 @@ class HeadcountAnalystTest < Minitest::Test
     assert_equal 0.801, @ha.kindergarten_participation_against_high_school_graduation('STEAMBOAT SPRINGS RE-2')
   end
 
-  def test_calculate_high
-    assert_equal 0.898, @ha.calculate_high("ACADEMY 20")
+
+  def test_variation_validator
+    assert @ha.variation_validator(0.6)
+    assert @ha.variation_validator(1.5)
+    assert @ha.variation_validator(1.0)
+    refute @ha.variation_validator(0.5)
+    refute @ha.variation_validator(1.6)
+  end
+
+  def test_group_validator
+    assert @ha.group_validator(0.71)
+    refute @ha.group_validator(0.22)
   end
 
   def test_kindergarten_participation_correlates_with_high_school_graduation
-    require "pry"; binding.pry
     assert_equal true, @ha.kindergarten_participation_correlates_with_high_school_graduation(for: 'ACADEMY 20')
   end
 
-  def test_correlation_statewide
-    assert_equal true, @ha.kindergarten_participation_correlates_with_high_school_graduation(:for => 'STATEWIDE')
+  def test_districts_correlation
+    assert_equal true, @ha.districts_correlation("ACADEMY 20")
   end
+
+  def test_correlation_statewide
+    refute @ha.kindergarten_participation_correlates_with_high_school_graduation(:for => 'STATEWIDE')
+  end
+
+  def test_correlation_across
+    districts = ["ACADEMY 20", 'PARK (ESTES PARK) R-3', 'YUMA SCHOOL DISTRICT 1']
+    assert @ha.kindergarten_participation_correlates_with_high_school_graduation(:across => districts)
+  end
+
 end

@@ -1,6 +1,5 @@
 require_relative 'test_helper'
 require_relative '../lib/enrollment'
-require 'pry'
 
 class EnrollmentTest < Minitest::Test
   def test_enrollment_can_be_created
