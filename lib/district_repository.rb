@@ -27,9 +27,15 @@ class DistrictRepository
   end
 
   def load_auxilary(file_data)
-    create_and_load_enrollments(file_data) if file_data.keys.include?(:enrollment)
-    create_and_load_statewide_tests(file_data) if file_data.keys.include?(:statewide_testing)
-    create_and_load_economic_profles(file_data) if file_data.keys.include?(:economic_profile)
+    keys = file_data.keys
+    
+    if keys.include?(:enrollment)
+      create_and_load_enrollments(file_data)
+    elsif keys.include?(:statewide_testing)
+      create_and_load_statewide_tests(file_data)
+    elsif keys.include?(:economic_profile)
+      create_and_load_economic_profles(file_data)
+    end
   end
 
   def create_and_load_economic_profles(file_data)
