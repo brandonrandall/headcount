@@ -2,7 +2,8 @@ require_relative 'clean'
 
 class Enrollment
   include Clean
-  attr_reader :name, :kindergarten_participation_by_year, :kindergarten_participation, :high_school_graduation
+  attr_reader :name, :kindergarten_participation_by_year,
+              :kindergarten_participation, :high_school_graduation
 
   def initialize(hash)
     @name = hash[:name].upcase
