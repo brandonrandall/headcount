@@ -21,11 +21,47 @@ class EconomicProfileTest < MiniTest::Test
 
   def test_median_household_income_average
     academy = @epr.find_by_name("Academy 20")
-    # require "pry"; binding.pry
     assert_equal 86203, academy.median_household_income_in_year(2007)
     assert_equal 89953, academy.median_household_income_in_year(2013)
     assert_raises(UnknownDataError) do
       academy.median_household_income_in_year(2033)
+    end
+  end
+
+  def test_median_household_income_average
+    academy = @epr.find_by_name("Academy 20")
+    assert_equal 87635, academy.median_household_income_average
+  end
+
+  def test_children_in_poverty_in_year
+    academy = @epr.find_by_name("academy 20")
+    assert_equal 0.042, academy.children_in_poverty_in_year(2005)
+    assert_raises(UnknownDataError) do
+      academy.children_in_poverty_in_year(1994)
+    end
+  end
+
+  def test_reduced_lunch_percentage_in_year
+    academy = @epr.find_by_name("academy 20")
+    assert_equal 0.127, academy.free_or_reduced_price_lunch_percentage_in_year(2014)
+    assert_raises(UnknownDataError) do
+      academy.free_or_reduced_price_lunch_percentage_in_year(3000)
+    end
+  end
+
+  def test_reduced_lunch_number_in_year
+    academy = @epr.find_by_name("academy 20")
+    assert_equal 3132, academy.free_or_reduced_price_lunch_number_in_year(2014)
+    assert_raises(UnknownDataError) do
+      academy.free_or_reduced_price_lunch_number_in_year(320)
+    end
+  end
+
+  def test_title_i_in_year
+    academy = @epr.find_by_name("academy 20")
+    assert_equal 0.027, academy.title_i_in_year(2014)
+    assert_raises(UnknownDataError) do
+      academy.title_i_in_year(1309)
     end
   end
 end
