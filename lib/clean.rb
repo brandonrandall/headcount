@@ -26,6 +26,8 @@ module Clean
   def self.percentage(percentage)
     if percentage == "N/A"
       percentage
+    elsif percentage == "NA"
+      percentage = "N/A"
     elsif percentage == "LNE"
       percentage = "N/A"
     else
