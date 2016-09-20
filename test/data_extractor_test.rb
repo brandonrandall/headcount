@@ -1,7 +1,6 @@
 require_relative 'test_helper'
 require_relative '../lib/district_repository'
 require 'csv'
-require 'pry'
 
 class DataExtractorTest < Minitest::Test
 
