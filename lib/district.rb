@@ -6,6 +6,7 @@ class District
     @name = hash[:name].upcase
     @enrollment = hash[:enrollment]
     @statewide_test = hash[:statewide_test]
+    @economic_profile = hash[:economic_profile]
   end
 
 end
