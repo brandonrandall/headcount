@@ -14,6 +14,7 @@ class EconomicProfileRepositoryTest < MiniTest::Test
   end
 
   def test_it_exists
+    require "pry"; binding.pry
     assert_instance_of EconomicProfileRepository, @epr
   end
 
