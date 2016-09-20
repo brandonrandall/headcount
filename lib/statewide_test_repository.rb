@@ -66,15 +66,18 @@ class StatewideTestRepository
   end
 
   def add_by_ethnicity(name, race_ethnicity, year, subject, percentage)
-    @statewide_tests[name].race_ethnicity_data[race_ethnicity] = {year => {subject => percentage}}
+    @statewide_tests[name].
+    race_ethnicity_data[race_ethnicity] = {year => {subject => percentage}}
   end
 
   def add_by_year(name, race_ethnicity, year, subject, percentage)
-    @statewide_tests[name].race_ethnicity_data[race_ethnicity][year] = {subject => percentage}
+    @statewide_tests[name].
+    race_ethnicity_data[race_ethnicity][year] = {subject => percentage}
   end
 
   def add_by_subject(name, race_ethnicity, year, subject, percentage)
-    @statewide_tests[name].race_ethnicity_data[race_ethnicity][year][subject] = percentage
+    @statewide_tests[name].
+    race_ethnicity_data[race_ethnicity][year][subject] = percentage
   end
 
   def grade(contents, grade)

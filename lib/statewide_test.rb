@@ -47,20 +47,28 @@ class StatewideTest
   end
 
   def proficient_for_subject_by_grade_in_year(subject, grade, year)
-    raise UnknownDataError, "Invalid parameter" unless [:math, :reading, :writing].include?(subject)
-    raise UnknownDataError, "Invalid parameter" unless [3,8].include?(grade)
-    raise UnknownDataError, "Invalid parameter" unless [2008, 2009, 2010, 2011, 2012, 2013, 2014].include?(year)
+    raise UnknownDataError,
+      "Invalid parameter" unless [:math, :reading, :writing].include?(subject)
+    raise UnknownDataError,
+      "Invalid parameter" unless [3,8].include?(grade)
+    raise UnknownDataError,
+      "Invalid parameter" unless [2008, 2009, 2010, 2011, 2012, 2013, 2014].
+        include?(year)
     if grade == 3
       Clean.three_round(@third_grade[year][subject])
-    elsif grade == 8
+    else
       Clean.three_round(@eighth_grade[year][subject])
     end
   end
 
   def proficient_for_subject_by_race_in_year(subject, race, year)
-    raise UnknownDataError, "Invalid parameter" unless [:math, :reading, :writing].include?(subject)
-    raise UnknownDataError, "Invalid parameter" unless @races.include?(race)
-    raise UnknownDataError, "Invalid parameter" unless [2008, 2009, 2010, 2011, 2012, 2013, 2014].include?(year)
+    raise UnknownDataError,
+      "Invalid parameter" unless [:math, :reading, :writing].include?(subject)
+    raise UnknownDataError,
+      "Invalid parameter" unless @races.include?(race)
+    raise UnknownDataError,
+      "Invalid parameter" unless [2008, 2009, 2010, 2011, 2012, 2013, 2014].
+        include?(year)
     Clean.three_round(@race_ethnicity_data[race][year][subject])
   end
 
