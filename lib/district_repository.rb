@@ -28,7 +28,7 @@ class DistrictRepository
 
   def load_auxilary(file_data)
     keys = file_data.keys
-    
+
     if keys.include?(:enrollment)
       create_and_load_enrollments(file_data)
     elsif keys.include?(:statewide_testing)
