@@ -58,12 +58,12 @@ class HeadcountAnalystTest < Minitest::Test
   end
 
 
-  def test_variation_validator
-    assert @ha.variation_validator(0.6)
-    assert @ha.variation_validator(1.5)
-    assert @ha.variation_validator(1.0)
-    refute @ha.variation_validator(0.5)
-    refute @ha.variation_validator(1.6)
+  def test_validator
+    assert @ha.validator(0.6)
+    assert @ha.validator(1.5)
+    assert @ha.validator(1.0)
+    refute @ha.validator(0.5)
+    refute @ha.validator(1.6)
   end
 
   def test_group_validator
