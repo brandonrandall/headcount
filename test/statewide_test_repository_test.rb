@@ -75,7 +75,7 @@ class StatewideTestRepositoryTest < Minitest::Test
     assert_equal data, @str.statewide_tests["ACADEMY 20"].race_ethnicity_data[:all_students]
   end
 
-  def test_add_by_subject #this and perhaps others could skew results... it was done out of context
+  def test_add_by_subject 
     @str.add_by_subject("ACADEMY 20", :hispanic, 2011, :math, 34.5)
     data = {2011=>{:math=>34.5, :reading=>0.7486, :writing=>0.6068},
             2012=>{:math=>0.5722, :reading=>0.77167, :writing=>0.5978},

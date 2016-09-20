@@ -6,7 +6,8 @@ class StatewideTest
     @third_grade  = {}
     @eighth_grade = {}
     @race_ethnicity_data = {}
-    @races = [:asian, :black, :pacific_islander, :hispanic, :native_american, :all_students, :two_or_more, :white]
+    @races = [:asian, :black, :pacific_islander, :hispanic, :native_american,
+              :all_students, :two_or_more, :white]
   end
 
   def proficient_by_grade(grade)
